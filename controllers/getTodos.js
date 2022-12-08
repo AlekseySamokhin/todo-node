@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const TodoModel = require("../models/TodoModel");
+const TodoModel = require("../models/todo");
 
 router.get("/", async (req, res) => {
-  console.log("getTodos");
   try {
-    const todos = await TodoModel.find({});
-    res.json(todos);
-  } catch (error) {
-    res.status(500).send(error.message);
+    const todolist = await TodoModel.find({});
+
+    res.json(todolist);
+  } catch (err) {
+    res.status(500).send(err.message);
   }
 });
 

@@ -18,6 +18,6 @@ todoSchema.method("toJSON", function () {
   return object;
 });
 
-const Todos = mongoose.model("Todos", todoSchema);
+const Todos = mongoose.model("TodoList", todoSchema);
 
 module.exports = Todos;

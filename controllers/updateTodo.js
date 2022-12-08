@@ -1,29 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const TodoModel = require("../models/TodoModel");
+const TodoModel = require("../models/todo");
 
 router.patch("/:id", async (req, res) => {
-  console.log("updateTodo");
-  console.log(req.params.id);
-  console.log(req.body);
-
   try {
-    if (!req.body.title) {
-      throw Error("Empty Title");
-    }
-    const updatedTodo = await TodoModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const id = req.params.id;
+    const updateTitle = req.body;
 
-    if (!updatedTodo) {
-      return res.status(404).json({ message: "Empty Title" });
+    if (!updateTitle) {
+      throw Error("Update title cannot be empty");
     }
+
+    const updatedTodo = await TodoModel.findByIdAndUpdate(id, updateTitle, {
+      new: true,
+    });
 
     res.json(updatedTodo);
-  } catch (error) {
-    res.status(500).send(error.message);
+  } catch (err) {
+    res.status(500).send(err.message);
   }
 });
 

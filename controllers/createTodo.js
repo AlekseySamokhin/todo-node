@@ -1,17 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const TodoModel = require("../models/TodoModel");
+const TodoModel = require("../models/todo");
 
 router.post("/", async (req, res) => {
-  console.log("createTodos");
   try {
+    const title = req.body.title;
+
+    if (!title) {
+      throw new Error("Title cannot be empty");
+    }
+
     const todo = new TodoModel({
-      title: req.body.title,
+      title,
     });
 
-    await todo.save();
+    const savedTodo = await todo.save();
 
-    res.json(todo);
+    res.json(savedTodo);
   } catch (err) {
     res.status(500).send(err.message);
   }
