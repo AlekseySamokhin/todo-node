@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const TodoModel = require("../models/todo");
+const TodoModel = require("../models/Todos");
 
 router.post("/", async (req, res) => {
+  console.log("create");
   try {
     const title = req.body.title;
 

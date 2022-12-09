@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const TodoModel = require("../models/todo");
+const TodoModel = require("../models/Todos");
 
 router.get("/", async (req, res) => {
+  console.log("get todos");
   try {
     const todolist = await TodoModel.find({});
 

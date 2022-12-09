@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const TodoModel = require("../models/todo");
+const TodoModel = require("../models/Todos");
 
 router.delete("/:id", async (req, res) => {
+  console.log("delete");
   try {
-    const _id = req.params.id;
+    const id = req.params.id;
 
     const deletedTodo = await TodoModel.findByIdAndDelete({
-      _id,
+      _id: id,
     });
 
     if (!deletedTodo) {

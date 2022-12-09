@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const TodoModel = require("../models/todo");
+const TodoModel = require("../models/Todos");
 
 router.patch("/:id", async (req, res) => {
+  console.log("update");
   try {
     const id = req.params.id;
     const updateTitle = req.body;
