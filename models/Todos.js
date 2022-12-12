@@ -9,13 +9,12 @@ const todoSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-});
+}).method("toJSON", function () {
+  const { __v, _id, ...other } = this.toObject();
 
-// delete fields __v and rename _id on id
-todoSchema.method("toJSON", function () {
-  const { __v, _id, ...object } = this.toObject();
-  object.id = _id;
-  return object;
+  other.id = _id;
+
+  return other;
 });
 
 const Todos = mongoose.model("todos", todoSchema);
