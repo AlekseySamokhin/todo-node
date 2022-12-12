@@ -6,15 +6,23 @@ router.patch("/:id", async (req, res) => {
   console.log("update");
   try {
     const id = req.params.id;
-    const updateTitle = req.body;
+    const updateTodo = req.body;
 
-    if (!updateTitle) {
+    const { title, completed } = updateTodo;
+
+    console.log(completed);
+
+    if (!title) {
       throw Error("Update title cannot be empty");
     }
 
-    const updatedTodo = await TodoModel.findByIdAndUpdate(id, updateTitle, {
-      new: true,
-    });
+    const updatedTodo = await TodoModel.findByIdAndUpdate(
+      id,
+      { title, completed },
+      {
+        new: true,
+      }
+    );
 
     res.json(updatedTodo);
   } catch (err) {
