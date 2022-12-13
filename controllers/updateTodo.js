@@ -10,8 +10,6 @@ router.patch("/:id", async (req, res) => {
 
     const { title, completed } = updateTodo;
 
-    console.log(completed);
-
     if (!title) {
       throw Error("Update title cannot be empty");
     }

@@ -1,18 +1,19 @@
+const { request } = require("express");
 const express = require("express");
 const router = express.Router();
 const TodoModel = require("../models/Todos");
 
 router.patch("/", async (req, res) => {
-  console.log("complete all todos");
-
   try {
+    console.log("complete all todos");
+
+    const { isCompletedAll } = req.body;
+    
     const todolist = await TodoModel.updateMany(
       {},
-      { $set: { completed: false } },
-      { upsert: true }
+      { completed: isCompletedAll },
+      { new: true }
     );
-
-    console.log(todolist);
 
     res.json(todolist);
   } catch (err) {
