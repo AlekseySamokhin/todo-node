@@ -13,11 +13,10 @@ router.delete("/", async (req, res) => {
 
     const todolist = await TodoModel.find({});
 
-    console.log(todolist);
-
     res.json(todolist);
   } catch (err) {
     res.status(500).send(err.message);
+    process.exit();
   }
 });
 
